@@ -2,11 +2,13 @@
 
 
 ## Create employee Table
-```sql
+```
+sql
 CREATE TABLE EMP (EMPNO NUMBER(4) PRIMARY KEY,ENAME VARCHAR2(10),JOB VARCHAR2(9),MGR NUMBER(4),HIREDATE DATE,SAL NUMBER(7,2),COMM NUMBER(7,2),DEPTNO NUMBER(2));
 ```
 ## Insert the values
-```sql
+```
+sql
 INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
 VALUES (7369, 'SMITH', 'CLERK', 7902, '17-DEC-80', 800, NULL, 20);
 
@@ -51,11 +53,13 @@ VALUES (7934, 'MILLER', 'CLERK', 7782, TO_DATE('23-JAN-82', 'DD-MON-RR'), 1300, 
 ```
 
 ## Create department table
-```sql
+```
+sql
 CREATE TABLE DEPT (DEPTNO NUMBER(2) PRIMARY KEY,DNAME VARCHAR2(14),LOC VARCHAR2(13));
 ```
 ## Insert the values in the department table
-```sql
+```
+sql
 INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (10, 'ACCOUNTING', 'NEW YORK');
 
 INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (20, 'RESEARCH', 'DALLAS');
@@ -69,52 +73,74 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 
 ### QUERY:
-
+```
+CREATE VIEW details AS SELECT ENAME FROM EMP WHERE SAL >(select SAL from EMP where EMPNO=7566);
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/38d1c14d-e96d-4b92-a83e-f02432fe157d)
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
-
+```
+CREATE VIEW minimum AS select ENAME,JOB,SAL from EMP where SAL =(select MIN(SAL) from EMP);
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/c6e9f116-c1a6-4b54-9ea3-c75f110e11b6)
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
-
+```
+select ENAME,JOB from EMP where  DEPTNO=10 AND JOB='SALESMAN';
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/128e3aac-1b76-48d8-9d24-6ef23e704f75)
 
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
+```
+create view empv5 as select EMPNO,ENAME,JOB from EMP where DEPTNO=10;
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/13c5d57e-bcec-4380-9ff2-ab8e26980180)
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
-
+```
+create view empv30 AS select EMPNO,ENAME,SAL from EMP where DEPTNO=30;
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/b83aa31e-c7c2-4c27-9b5b-5a78337c9cb3)
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
+```
+update EMP set SAL=SAL*1.1 WHERE JOB='clerk';
 
+create view empv8 as select EMPNO,ENAME,SAL,JOB from EMP;
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/6de1f157-2783-44d2-a58a-da4c5940ce0b)
 
 ## Create a Customer1 Table
-```sql
+```
+sql
 CREATE TABLE Customer1 (customer_id INT,cust_name VARCHAR(20),city VARCHAR(20),grade INT,salesman_id INT);
 ```
 ## Inserting Values to the Table
-```sql
+```
+sql
 INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3002, 'Nick Rimando', 'New York', 100, 5001);
 INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3007, 'Brad Davis', 'New York', 200, 5001);
 INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3005, 'Graham Zusi', 'California', 200, 5002);
@@ -125,11 +151,13 @@ INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(
 INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3001, 'Brad Guzan', 'London', NULL, 5005);
 ```
 ## Create a Salesperson1 table
-```sql
+```
+sql
 CREATE TABLE Salesman1 (salesman_id INT,name VARCHAR(20),city VARCHAR(20),commission DECIMAL(4,2));
 ```
 ## Inserting Values to the Table
-```sql
+```
+sql
 INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5001, 'James Hoog', 'New York', 0.15);
 INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5002, 'Nail Knite', 'Paris', 0.13);
 INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5005, 'Pit Alex', 'London', 0.11);
@@ -140,28 +168,50 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-
+```SELECT salesman1.name AS "Salesman", customer1.cust_name AS "Customer Name", salesman1.city AS "City" from salesman1 INNER JOIN customer1 ON salesman1.city=customer1.city;
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/ffdb4f2c-aaf8-499d-9f51-6b40fb560bac)
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
-
+```
+SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id WHERE salesman1.commission>0.13;
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/e8674029-fa7f-43e7-938f-652e44ce62e4)
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
+```
+SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id WHERE salesman1.commission>0.13;
+```
 
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/e0d4a8cf-c6f5-454c-9646-8d721ff3127f)
 
 ### Q10) Perform Left and right join on both tables
 
-### QUERY:
-
+### QUERY FOR LEFT JOIN:
+```
+SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commissioSELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id WHERE salesman1.commission>0.13;
+```
+``` select * from customer1 natural join salesman1;
+```
 
 ### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/03d32b85-bcc0-46e0-b5b2-274232784d21)
+
+### QUERY FOR RIGHT JOIN:
+```
+SELECT * FROM salesman1 RIGHT JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id;
+```
+### OUTPUT:
+![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/b58ebc75-3251-43c2-b772-b15e61590cdc)
+
