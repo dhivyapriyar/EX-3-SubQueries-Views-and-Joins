@@ -4,69 +4,40 @@
 ## Create employee Table
 ```
 sql
-CREATE TABLE EMP (EMPNO NUMBER(4) PRIMARY KEY,ENAME VARCHAR2(10),JOB VARCHAR2(9),MGR NUMBER(4),HIREDATE DATE,SAL NUMBER(7,2),COMM NUMBER(7,2),DEPTNO NUMBER(2));
+create table emp (empno int(10) primary key,name char(30),job char(30),sal int(10),deptno int(8));
 ```
 ## Insert the values
 ```
 sql
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7369, 'SMITH', 'CLERK', 7902, '17-DEC-80', 800, NULL, 20);
+insert into emp(empno,name,job,sal,deptno) values (1201,'dhivya','manager',1235,12);
 
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7499, 'ALLEN', 'SALESMAN', 7698, '20-FEB-81', 1600, 300, 30);
+insert into emp(empno,name,job,sal,deptno) values (1202,'varsha','clerk',1234,13);
 
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7521, 'WARD', 'SALESMAN', 7698, '22-FEB-81', 1250, 500, 30);
+insert into emp(empno,name,job,sal,deptno) values (1203,'swetha','manager',12345,15);
 
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7566, 'JONES', 'MANAGER', 7839, '02-APR-81', 2975, NULL, 20);
+insert into emp(empno,name,job,sal,deptno) values (1204,'vidhya','clerk',1236,12);
 
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7654, 'MARTIN', 'SALESMAN', 7698, '28-SEP-81', 1250, 1400, 30);
+insert into emp(empno,name,job,sal,deptno) values (1205,'prabha','salesman',1237,13);
 
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7698, 'BLAKE', 'MANAGER', 7839, '01-MAY-81', 2850, NULL, 30);
+insert into emp(empno,name,job,sal,deptno) values (1206,'jeeva','accountant',12345,17);
 
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7782, 'CLARK', 'MANAGER', 7839, '09-JUN-81', 2450, NULL, 10);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7788, 'SCOTT', 'ANALYST', 7566, '19-APR-87', 3000, NULL, 20);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7839, 'KING', 'PRESIDENT', NULL, '17-NOV-81', 5000, NULL, 10);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7844, 'TURNER', 'SALESMAN', 7698, '08-SEP-81', 1500, 0, 30);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7876, 'ADAMS', 'CLERK', 7788, '23-MAY-87', 1100, NULL, 20);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7900, 'JAMES', 'CLERK', 7698, '03-DEC-81', 950, NULL, 30);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7902, 'FORD', 'ANALYST', 7566, TO_DATE('03-DEC-81', 'DD-MON-RR'), 3000, 20, 20);
-
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES (7934, 'MILLER', 'CLERK', 7782, TO_DATE('23-JAN-82', 'DD-MON-RR'), 1300, 10, 10);
 ```
 
 ## Create department table
 ```
 sql
-CREATE TABLE DEPT (DEPTNO NUMBER(2) PRIMARY KEY,DNAME VARCHAR2(14),LOC VARCHAR2(13));
+create table dept(deptno int(5) primary key,deptname char(30),loc char(40));
 ```
 ## Insert the values in the department table
 ```
 sql
-INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (10, 'ACCOUNTING', 'NEW YORK');
+insert into dept (deptno,deptname,loc) values (1,'research','chandigarh');
 
-INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (20, 'RESEARCH', 'DALLAS');
+insert into dept (deptno,deptname,loc) values (2,'accounting','delhi');
 
-INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (30, 'SALES', 'CHICAGO');
+insert into dept (deptno,deptname,loc) values (3,'manufacture','chennai');
 
-INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
+insert into dept (deptno,deptname,loc) values (4,'marketing','hyderabad');
 ```
 
 ### Q1) List the name of the employees whose salary is greater than that of employee with empno 7566.
@@ -74,11 +45,11 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 ### QUERY:
 ```
-CREATE VIEW details AS SELECT ENAME FROM EMP WHERE SAL >(select SAL from EMP where EMPNO=7566);
+create view minimum as select name,job,sal from emp where sal =(select min(sal) from emp);
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/38d1c14d-e96d-4b92-a83e-f02432fe157d)
+![3 1](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/548c9137-42ee-46bd-beaa-544a0380cf6a)
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
@@ -88,130 +59,129 @@ CREATE VIEW minimum AS select ENAME,JOB,SAL from EMP where SAL =(select MIN(SAL)
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/c6e9f116-c1a6-4b54-9ea3-c75f110e11b6)
+![3 2](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/c20d4cb8-b2ba-4eb3-a0e2-90e49a258b6b)
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
 ```
-select ENAME,JOB from EMP where  DEPTNO=10 AND JOB='SALESMAN';
+ select name,job from emp where  deptno=12 and job='manager';
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/128e3aac-1b76-48d8-9d24-6ef23e704f75)
+![3 3](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/ad51c325-172f-4e41-a9a8-2713911585e2)
 
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
 ```
-create view empv5 as select EMPNO,ENAME,JOB from EMP where DEPTNO=10;
+create view empv5 as select empno,name,job from emp where deptno=13;
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/13c5d57e-bcec-4380-9ff2-ab8e26980180)
+![3 4](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/a68a54bb-b200-4839-a036-96caa19c68b8)
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
 ```
-create view empv30 AS select EMPNO,ENAME,SAL from EMP where DEPTNO=30;
+ create view empv30 as select empno,name,sal from emp where deptno=17;
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/b83aa31e-c7c2-4c27-9b5b-5a78337c9cb3)
+![3 5](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/cc8477e9-d25a-4ea7-97dc-5977545cfd1e)
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
 ```
-update EMP set SAL=SAL*1.1 WHERE JOB='clerk';
-
-create view empv8 as select EMPNO,ENAME,SAL,JOB from EMP;
+ update emp set sal=sal*1.1 where job='clerk';
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/6de1f157-2783-44d2-a58a-da4c5940ce0b)
+![3 6](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/2eb5d9d8-87ff-4a47-9054-ed6431fba051)
 
 ## Create a Customer1 Table
 ```
 sql
-CREATE TABLE Customer1 (customer_id INT,cust_name VARCHAR(20),city VARCHAR(20),grade INT,salesman_id INT);
+create table customer1(cusid int(8),cusname char(20),city char(92),grade int(5),salesid int(27));
 ```
 ## Inserting Values to the Table
 ```
 sql
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3002, 'Nick Rimando', 'New York', 100, 5001);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3007, 'Brad Davis', 'New York', 200, 5001);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3005, 'Graham Zusi', 'California', 200, 5002);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3008, 'Julian Green', 'London', 300, 5002);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3004, 'Fabian Johnson', 'Paris', 300, 5006);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3009, 'Geoff Cameron', 'Berlin', 100, 5003);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3003, 'Jozy Altidor', 'Moscow', 200, 5007);
-INSERT INTO Customer1 (customer_id, cust_name, city, grade, salesman_id) VALUES(3001, 'Brad Guzan', 'London', NULL, 5005);
+insert into customer1 (cusid,cusname,city,grade,salesid) values (100,'dhivya','chennai',5,123);
+
+insert into customer1 (cusid,cusname,city,grade,salesid) values (102,'varsha','chennai',5,123);
+
+insert into customer1 (cusid,cusname,city,grade,salesid) values (103,'vidhya','kanchipuram',5,125);
+
+insert into customer1 (cusid,cusname,city,grade,salesid) values (104,'yuva','coimbatore',7,126);
+
+insert into customer1 (cusid,cusname,city,grade,salesid) values (108,'prabha','kerala',4,127);
 ```
 ## Create a Salesperson1 table
 ```
 sql
-CREATE TABLE Salesman1 (salesman_id INT,name VARCHAR(20),city VARCHAR(20),commission DECIMAL(4,2));
+create table salesperson (salesid int(2),city char(39),salesname char(20),commission int(5));
 ```
 ## Inserting Values to the Table
 ```
 sql
-INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5001, 'James Hoog', 'New York', 0.15);
-INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5002, 'Nail Knite', 'Paris', 0.13);
-INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5005, 'Pit Alex', 'London', 0.11);
-INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5006, 'Mc Lyon', 'Paris', 0.14);
-INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5007, 'Paul Adam', 'Rome', 0.13);
-INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson Hen', 'San Jose', 0.12);
+insert into salesperson(salesid,city,salesname,commission) values(1,'chennai','vijis',100);
+
+insert into salesperson(salesid,city,salesname,commission) values(2,'puzhal','dhru',500);
+
+insert into salesperson(salesid,city,salesname,commission) values(3,'pondy','jeeva',400);
+
+insert into salesperson(salesid,city,salesname,commission) values(4,'nungambakkam','deepesh',700);
 ```
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-```SELECT salesman1.name AS "Salesman", customer1.cust_name AS "Customer Name", salesman1.city AS "City" from salesman1 INNER JOIN customer1 ON salesman1.city=customer1.city;
+```
+select salesperson.salesname AS "Salesman", customer1.cusname as "Customer Name", salesperson.city AS "City" from salesperson inner join customer1 on salesperson.city=customer1.city;
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/ffdb4f2c-aaf8-499d-9f51-6b40fb560bac)
+![3 7](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/869e87c8-679f-4f61-b37b-c136101820de)
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
 ```
-SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id WHERE salesman1.commission>0.13;
+select customer1.cusname as "Customer Name",customer1.city as "Customer City",salesperson.salesname AS "Salesman",salesperson.commission as "Commission" from salesperson inner join customer1 on salesperson.salesid=customer1.salesid where salesperson.commission>400;
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/e8674029-fa7f-43e7-938f-652e44ce62e4)
+![3 8](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/0a923143-155d-4a39-a88a-b2fc35f40e09)
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
 ```
-SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id WHERE salesman1.commission>0.13;
+ select customer1.cusname as "Customer Name",customer1.city as "Customer City",salesperson.salesname AS "Salesman",salesperson.commission as "Commission" from salesperson inner join customer1 on salesperson.salesid=customer1.salesid where salesperson.commission>400;
 ```
 
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/e0d4a8cf-c6f5-454c-9646-8d721ff3127f)
+![3 9](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/d19b410f-3a93-444e-afca-2ecd05b4d68c)
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY FOR LEFT JOIN:
 ```
-SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commissioSELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id WHERE salesman1.commission>0.13;
-```
-``` select * from customer1 natural join salesman1;
+select * from salesperson left join customer1 on salesperson.city=customer1.city;
 ```
 
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/03d32b85-bcc0-46e0-b5b2-274232784d21)
+![3 10](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/41dacc66-518d-4f4d-aece-0965d357f9d0)
 
 ### QUERY FOR RIGHT JOIN:
 ```
-SELECT * FROM salesman1 RIGHT JOIN customer1 ON salesman1.salesman_id=customer1.salesman_id;
+select * from salesperson RIGHT JOIN customer1 on salesperson.city=customer1.city;
 ```
 ### OUTPUT:
-![image](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/b58ebc75-3251-43c2-b772-b15e61590cdc)
+![3 11](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/65726b6b-0776-4961-adaa-7a9fbada98c3)
 
