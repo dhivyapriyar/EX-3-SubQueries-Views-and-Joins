@@ -1,5 +1,10 @@
 # EX 3 SubQueries, Views and Joins 
 
+## DATE:
+
+## AIM:
+
+To create a employee table.
 
 ## Create employee Table
 ```
@@ -185,3 +190,6 @@ select * from salesperson RIGHT JOIN customer1 on salesperson.city=customer1.cit
 ### OUTPUT:
 ![3 11](https://github.com/dhivyapriyar/EX-3-SubQueries-Views-and-Joins/assets/119477552/65726b6b-0776-4961-adaa-7a9fbada98c3)
 
+### RESULT:
+
+Thus the employee table is created successfully.
